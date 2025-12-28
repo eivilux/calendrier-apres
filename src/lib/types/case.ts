@@ -31,7 +31,7 @@ export namespace Case {
             file: sveltefile,
             path: imagepath,
 
-            canShow: now.getTime() > date.getTime()
+            canShow: now.getTime() >= date.getTime()
         };
     }
 
