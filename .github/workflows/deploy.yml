@@ -1,4 +1,4 @@
-name: Déploiement Calendrier de l'après d'Eivilux
+name: Deploy Eivilux After Calendar
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
 
     permissions:
       contents: write
-      pages: write 
+      pages: write
 
     steps:
       - name: Checkout repository
@@ -21,12 +21,62 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build the site
+      - name: Check cases and images consistency
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          const casesDir = path.resolve('src/lib/cases');
+          const imagesDir = path.resolve('static/images/cases');
+
+          if (!fs.existsSync(casesDir)) {
+            console.error('Missing directory: src/lib/cases');
+            process.exit(1);
+          }
+
+          if (!fs.existsSync(imagesDir)) {
+            console.error('Missing directory: static/images/cases');
+            process.exit(1);
+          }
+
+          const getNames = (dir) =>
+            fs.readdirSync(dir)
+              .filter(f => !f.startsWith('.'))
+              .map(f => path.parse(f).name)
+              .sort();
+
+          const caseFiles = getNames(casesDir);
+          const imageFiles = getNames(imagesDir);
+
+          const missingImages = caseFiles.filter(f => !imageFiles.includes(f));
+          const missingCases = imageFiles.filter(f => !caseFiles.includes(f));
+
+          if (missingImages.length || missingCases.length) {
+            console.error('Cases / images mismatch detected');
+
+            if (missingImages.length) {
+              console.error('Cases without image:');
+              missingImages.forEach(f => console.error(`- ${f}`));
+            }
+
+            if (missingCases.length) {
+              console.error('Images without case:');
+              missingCases.forEach(f => console.error(`- ${f}`));
+            }
+
+            process.exit(1);
+          }
+
+          console.log('Cases and images are consistent');
+          EOF
+
+      - name: Build site
         run: npm run build
 
       - name: Deploy to GitHub Pages
