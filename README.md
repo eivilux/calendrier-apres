@@ -77,4 +77,4 @@ For questions, suggestions, or partnership requests, open an **issue** or contac
 
 ---
 
-*Mad by Eivi-lux*
+*Made by Eivi-lux*
