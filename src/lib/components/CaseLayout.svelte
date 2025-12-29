@@ -14,7 +14,7 @@
 	<img
 		src={image}
 		alt={alt}
-		class="max-w-full max-h-80 rounded shadow mt-8 self-center"
+		class="max-w-full max-h-80 rounded shadow mt-4 self-center"
 	/>
 
     {#if image_bot}
