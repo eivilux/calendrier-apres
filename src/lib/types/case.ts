@@ -17,7 +17,9 @@ export namespace Case {
         const filename = filePath.split('.')[0];
         const sveltefile = `../lib/cases/${filename}.svelte`;
         const imagepath = `/images/cases/${filePath}`;
-        const date = new Date(filename);
+
+        const [year, month, day] = filename.split('-').map(Number);
+        const date = new Date(year, month - 1, day);
 
         if (isNaN(date.getTime())) {
             return null;
@@ -31,7 +33,7 @@ export namespace Case {
             file: sveltefile,
             path: imagepath,
 
-            canShow: now.getTime() >= date.getTime()
+            canShow: now.getTime() > date.getTime()
         };
     }
 
