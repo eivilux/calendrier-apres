@@ -58,11 +58,11 @@ yarn build
 The static site will be generated in the `build/` directory.
 
 #### Static Assets
-- Place images in `static/images/`
-- Place the podcast audio in `static/audio/`
+- Place images in `static/images/cases/`
+- Place the podcast audio in `static/audios/`
 
 ### GitHub Pages
-The app is configured to work out-of-the-box with GitHub Pages. Paths are automatically set for the `/eivilux-calendrier-apres` base.
+The app is configured to work out-of-the-box with GitHub Pages. Paths are automatically set for the `/calendrier-apres` base.
 
 ## Contributing
 
