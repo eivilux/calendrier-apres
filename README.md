@@ -2,14 +2,13 @@
 
 Welcome to the Eivilux After Calendar project!
 
-This interactive web app offers a special calendar from **December 29th to January 2nd**. Each day, a new box unlocks to reveal an exclusive image or content. On January 1st, discover a special audio podcast to start the year!
+This interactive web app features a special calendar where, each day, a new box unlocks to reveal exclusive images or content.
 
 ## Features
 
-- Displays days from December 29th to January 2nd
+- Displays available days
 - Boxes unlock according to the real date
 - Each day reveals an image (jpg, png, jpeg, webp, gif)
-- January 1st: reveals an audio podcast with a special message
 - Optimized deployment for **GitHub Pages** (automatic path handling)
 
 ## Getting Started
@@ -59,7 +58,7 @@ The static site will be generated in the `build/` directory.
 
 #### Static Assets
 - Place images in `static/images/cases/`
-- Place the podcast audio in `static/audios/`
+- Place the audios in `static/audios/`
 
 ### GitHub Pages
 The app is configured to work out-of-the-box with GitHub Pages. Paths are automatically set for the `/calendrier-apres` base.
@@ -74,8 +73,8 @@ This project is licensed under the **MIT License**. See the `LICENSE` file for d
 
 ## Contact
 
-For questions, suggestions, or partnership requests, open an **issue** or contact us via the Eivilux project channels.
+For questions, suggestions, or partnership requests, open an **issue** or contact us by mail at info@eivi-lux.com.
 
 ---
 
-*Made with ❤️ by the Eivilux community*
+*Mad by Eivi-lux*
