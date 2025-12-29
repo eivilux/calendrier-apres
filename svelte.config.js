@@ -5,15 +5,7 @@ const config = {
   kit: {
     adapter: adapter({
       fallback: '200.html'
-    }),
-    paths: {
-      base: process.env.NODE_ENV === 'production'
-        ? '/calendrier-apres'
-        : '',
-			assets: process.env.NODE_ENV === 'production'
-				? '/calendrier-apres'
-				: ''
-    }
+    })
   }
 };
 
