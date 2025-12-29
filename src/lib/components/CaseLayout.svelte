@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { asset } from '$app/paths';
-
 	export let image: string;
 	export let alt: string = '';
     export let image_bot: boolean = true;
@@ -14,7 +12,7 @@
     {/if}
 
 	<img
-		src={asset(image)}
+		src={image}
 		alt={alt}
 		class="max-w-full max-h-80 rounded shadow mt-8 self-center"
 	/>

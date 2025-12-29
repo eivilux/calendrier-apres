@@ -2,6 +2,7 @@
 	import type { Case } from '$lib/types/case';
 	import { Case as CaseNamespace } from '$lib/types/case';
 	import CaseLayout from '$lib/components/CaseLayout.svelte';
+
 	import type { SvelteComponent } from 'svelte';
 
 	export let data: { days: Case[] };
@@ -14,7 +15,7 @@
 	async function openCase(Case: Case): Promise<void> {
 		if (!Case.canShow) return;
 
-		const loader = cases[Case.file];
+		const loader = cases[Case.component];
 		if (!loader) {
 			component = null;
 			return;
@@ -90,7 +91,7 @@
 
 					<div class="w-full flex flex-col items-center">
 						{#if component}
-							<CaseLayout image='{selectedDay.path}' alt="{CaseNamespace.getString(selectedDay)}" image_bot={CaseNamespace.isBotPic(selectedDay)}>
+							<CaseLayout image={selectedDay.image} alt="{CaseNamespace.getString(selectedDay)}" image_bot={CaseNamespace.isBotPic(selectedDay)}>
 								<svelte:component this={component} />
 							</CaseLayout>
 						{:else}

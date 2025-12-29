@@ -1,13 +1,15 @@
 import { BOT_PICS } from '$lib/config/specialCases';
 import { MONTHS } from '$lib/config/consts';
 
+import { asset } from '$app/paths';
+
 export interface Case {
     dayNumber: number;
     month: number;
     year: number;
 
-    file: string;
-    path: string;
+    component: string;
+    image: string;
 
     canShow: boolean;
 }
@@ -16,7 +18,7 @@ export namespace Case {
     export function fromFile(filePath: string, now: Date): Case | null {
         const filename = filePath.split('.')[0];
         const sveltefile = `../lib/cases/${filename}.svelte`;
-        const imagepath = `/images/cases/${filePath}`;
+        const imagepath = asset(`/images/cases/${filePath}`);
 
         const [year, month, day] = filename.split('-').map(Number);
         const date = new Date(year, month - 1, day);
@@ -30,8 +32,8 @@ export namespace Case {
             month: date.getMonth() + 1,
             year: date.getFullYear(),
             
-            file: sveltefile,
-            path: imagepath,
+            component: sveltefile,
+            image: imagepath,
 
             canShow: now.getTime() > date.getTime()
         };
