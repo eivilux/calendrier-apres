@@ -4,8 +4,9 @@
 	import CaseLayout from '$lib/components/CaseLayout.svelte';
 
 	import type { SvelteComponent } from 'svelte';
+	import { onMount } from 'svelte';
 
-	export let data: { days: Case[] };
+	export let data: { cases: Case[] };
 
 	const cases = import.meta.glob<{ default: typeof SvelteComponent }>('../lib/cases/*.svelte');
 
@@ -29,6 +30,21 @@
 		selectedDay = null;
 		component = null;
 	}
+
+	onMount(() => {
+		const today = new Date();
+		today.setHours(0, 0, 0, 0);
+
+		data.cases = data.cases.map(c => {
+			const caseDate = new Date(c.year, c.month - 1, c.dayNumber);
+			caseDate.setHours(0, 0, 0, 0);
+
+			return {
+				...c,
+				canShow: caseDate <= today
+			};
+		});
+	});
 </script>
 
 <main class="min-h-screen flex flex-col py-4 px-3 xs:px-4 sm:py-8 sm:px-6 overflow-x-hidden items-center w-full">
@@ -38,7 +54,7 @@
 
 	<div class="absolute inset-0 flex items-center justify-center w-full">
 		<div class="flex flex-row flex-wrap justify-center items-center gap-4 max-w-5xl w-full">
-			{#each data.days as Case}
+			{#each data.cases as Case}
 				<button
 					class="w-[140px] h-[140px] rounded-lg sm:rounded-xl bg-white/60 backdrop-blur-md border-2 border-white/60 flex flex-col items-center justify-center shadow-xl transition-all text-neutral-900 text-lg sm:text-xl font-semibold relative group select-none mx-1 my-1 extra-dark-case hover:bg-white/80 group-hover:border-yellow-300 disabled:opacity-40 disabled:cursor-not-allowed"
 					aria-label={CaseNamespace.getString(Case)}

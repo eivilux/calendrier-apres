@@ -10,7 +10,7 @@ export async function load() {
     const imagesPath = path.join(process.cwd(), 'static/images/cases');
     const files = await readdir(imagesPath);
 
-    const days = files.map((file) => CaseNamespace.fromFile(file, now)).filter((c): c is Case => c !== null).sort(CaseNamespace.compare);
+    const cases = files.map((file) => CaseNamespace.fromFile(file, now)).filter((c): c is Case => c !== null).sort(CaseNamespace.compare);
 
-    return { days };
+    return { cases };
 }
